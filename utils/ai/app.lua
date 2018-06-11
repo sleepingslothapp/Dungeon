@@ -1,0 +1,191 @@
+local Object = {}
+
+function Object:init( p )
+	local p = p or {}
+	local obj = {}
+	local tm ={}
+	local orighp = enemy_stats[p.file].hp;
+	local temphp = orighp;
+	p.this.obj = obj
+	obj.flip = 1
+	obj.isChase = false
+	obj.isAttack = false
+	obj.isRespawn = false
+	p.this.id = math.random(0,999)..os.time()..math.random(0,999)
+
+	local xPos = 0
+	local yPos = 0
+	local angle = 0
+	local isNotDead = true
+	local dieValue = {'die1','die2','die3'}
+	local die = dieValue[math.random(1,3)]
+	
+	local attackFPS = 0
+
+	obj.hitBox = display.newImageRect( p.this,'assets/img/'..p.file..'.png', enemy_stats[p.file].hitW,enemy_stats[p.file].hitH )
+	obj.hitBox.alpha = 0
+
+
+	obj.hpBarShadow = display.newRect( p.this, 5, 8, 10, 2 )
+	obj.hpBarShadow.fill = {0.5,0.5,0.5}
+	obj.hpBarShadow.anchorX = 1
+	obj.hpBarShadow.anchorY = 0
+	obj.hpBar = display.newRect( p.this, 5, 8, 10, 2 )
+	obj.hpBar.anchorX = 1
+	obj.hpBar.anchorY = 0
+
+
+	local weaponHolder = display.newRect( p.this, 0, 0, 5, 5 )
+	weaponHolder.alpha = 0
+	weaponHolder.name = 'eWeapon'
+
+	local sensor = display.newCircle( p.this, 0, 0, 30 )
+	sensor.alpha = 0
+	sensor.id = p.this.id
+	sensor.obj = obj
+	sensor.this = p.this
+	sensor.name = 'sensor'
+	physics.addBody( sensor, 'static', {isSensor=true,radius=30,filter= { categoryBits=32, maskBits=1 }} )
+
+	local attackRange = display.newCircle( p.this, 0, 0, 10 )
+	attackRange.alpha = 0
+	attackRange.obj = obj
+	attackRange.this = p.this
+	attackRange.name = 'range'
+	attackRange.sensor = sensor
+	attackRange.weaponHolder = weaponHolder
+	physics.addBody( attackRange, 'static', {isSensor=true,radius=10,filter={ categoryBits=64, maskBits=1 }} )
+
+
+	p.map:insertNewObject(sensor)
+	p.map:insertNewObject(attackRange)
+	p.map:insertNewObject(weaponHolder)
+
+	function obj:attack( )
+		if (isNotDead) then	
+			obj:playSequence('attack')
+		else
+			obj:playSequence(die)
+		end
+
+	end
+	function obj:playSequence(seq)		
+		p.this.animation:setSequence( seq)
+		p.this.animation:play()
+	end
+
+	obj:playSequence('respawn')
+
+	function obj:actionAI()
+		if (p.this.animation.sequence == 'walk' and obj.isChase ~= true) then
+			p.this.speed = enemy_stats[p.file].speed
+			local randomFlip = math.random(1,9999)
+			if (randomFlip>100 and randomFlip<150) then
+				angle = math.random( 0,360 )
+			end
+		end
+		p.this.rotation = 0
+		sensor.x = p.this.x
+		sensor.y = p.this.y + 3
+		attackRange.x = p.this.x
+		attackRange.y = p.this.y + 5
+		weaponHolder.x = p.this.x
+		weaponHolder.y = p.this.y
+		if (obj.isRespawn) then
+			if (obj.isChase) then
+				angle = (math.atan2( sensor.x-(p.player.x), sensor.y-p.player.y )*(180/math.pi))+90
+				move_in_angle_ai(p.this,angle)
+			else
+				move_in_angle_ai(p.this,angle)
+			end
+		end
+	
+		if (angle>91 and angle<269) then
+			p.this.xScale = -1
+			obj.flip = -1
+			obj.hpBarShadow.xScale = 1
+			obj.hpBar.xScale = (temphp/orighp) + 0.0001
+			obj.hpBarShadow.x = 5
+			obj.hpBar.x = 5
+		elseif (angle ~= 0) then	
+			p.this.xScale = 1
+			obj.flip = 1
+			obj.hpBarShadow.xScale = -1
+			obj.hpBar.xScale = -(temphp/orighp) + 0.0001
+			obj.hpBarShadow.x = -5
+			obj.hpBar.x = -5
+		end
+	end
+
+	function obj:hit(  )
+		if (isNotDead) then
+			temphp = temphp - 1
+			obj.hitBox.alpha = 0.8
+			timer.performWithDelay( 100, function (  )
+				obj.hitBox.alpha = 0
+			end ,1 )
+		end
+		obj.hpBar.xScale = (temphp / orighp) + 0.0001
+		if (temphp <= 0) then
+			isNotDead = false
+			obj:playSequence(die)
+		end
+	end
+
+	function obj:destroy()
+		Runtime:removeEventListener( "enterFrame", obj )
+		p.this:removeSelf( )
+		sensor:removeSelf( )
+		weaponHolder:removeSelf( )
+		attackRange:removeSelf( )
+	end
+
+	function obj:enterFrame()
+		obj:actionAI()
+	end
+
+	local function spriteListener( event )
+		local name = event.name
+		local target = event.target
+		local phase = event.phase
+		local sequence = target.sequence
+		if (sequence == 'attack') then
+			attackFPS = attackFPS + 1
+			if (attackFPS > 9) then
+				e_weapon_settings.properties.shape = {0,-6, (11*obj.flip),-6, (11*obj.flip),10, 0,10}		
+				physics.addBody( weaponHolder, 'dynamic',e_weapon_settings.properties )
+			end
+			if (phase == 'ended') then					
+				physics.removeBody( weaponHolder, 'dynamic' )
+				if (obj.isAttack) then
+					obj:attack()
+				else
+					obj:playSequence('walk')		
+					p.this.speed = enemy_stats[p.file].speed	
+				end
+			end
+		elseif (sequence == 'alert') then
+			if (phase == 'ended') then					
+				obj:playSequence('walk')
+				obj.isChase = true
+			end
+		elseif (sequence == die) then
+			if (phase == 'ended') then					
+				obj:destroy()
+			end
+		elseif (sequence == 'respawn') then
+			if (phase == 'ended') then					
+				obj.isRespawn = true
+				obj:playSequence('walk')
+			end
+		end
+		if (event.phase == 'ended' or event.phase == 'loop') then
+			attackFPS = 0
+		end
+	end
+
+	p.this.animation:addEventListener( "sprite", spriteListener )
+	Runtime:addEventListener( "enterFrame", obj )
+	return obj
+end
+return Object;
