@@ -35,8 +35,10 @@ function enemyChase (params)
 	local params = params or {}
 	local collisionVariable = collisionChecker(params,'player','sensor') or nil
 	if(collisionVariable) then
-		if (collisionVariable.obj.isRespawn) then			
+		if (collisionVariable.obj.isRespawn) then
+		collisionVariable.obj.isChase = params.isChase	
 			if (params.isChase) then
+				collisionVariable.obj.isRespawn = true
 				collisionVariable.obj:playSequence(params.seq1)
 			end
 		end
