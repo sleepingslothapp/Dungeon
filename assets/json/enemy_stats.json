@@ -6,6 +6,7 @@
 		"hitW":32,
 		"hitH":32,
 		"sensor":30,
-		"range":10,
+		"range":9,
+		"positioning":3,
 	}
 }

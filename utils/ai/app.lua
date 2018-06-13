@@ -91,14 +91,14 @@ function Object:init( p )
 		end
 		p.this.rotation = 0
 		sensor.x = p.this.x
-		sensor.y = p.this.y + 3
+		sensor.y = p.this.y
 		attackRange.x = p.this.x
-		attackRange.y = p.this.y
+		attackRange.y = p.this.y + enemy_stats[p.file].positioning
 		weaponHolder.x = p.this.x
-		weaponHolder.y = p.this.y
+		weaponHolder.y = p.this.y + enemy_stats[p.file].positioning
 		if (obj.isRespawn) then
 			if (obj.isChase) then
-				angle = (math.atan2( sensor.x-(p.player.x), sensor.y-p.player.y )*(180/math.pi))+90
+				angle = (math.atan2( sensor.x-(p.player.x), sensor.y-(p.player.y) )*(180/math.pi))+90
 				move_in_angle_ai(p.this,angle)
 			else
 				move_in_angle_ai(p.this,angle)

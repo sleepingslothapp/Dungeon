@@ -6,6 +6,7 @@ function onGlobalCollision( event )
 		enemyChase({event=event,seq1='alert',seq2='walk',time=200,isChase=true})
 		enemyAttack({event=event,isAttack=true,seq1='attack',seq2='walk'})
 		enemyHit({event=event})
+		playerHit({event=event})
     elseif ( event.phase == "ended" ) then
     print( event.object1.name,event.object2.name )
 		enemyChase({event=event,seq1='idle',seq2='walk',time=200,isChase=false}) 
@@ -53,8 +54,10 @@ function enemyAttack(params)
 	local collisionVariable = collisionChecker( params,'player','range' ) or nil
 	if (collisionVariable) then
 		collisionVariable.obj.isAttack = params.isAttack
-		if (collisionVariable.obj.isAttack) then
-			collisionVariable.obj:attack()
+		if (collisionVariable.obj.isRespawn) then
+			if (collisionVariable.obj.isAttack) then
+				collisionVariable.obj:attack()
+			end
 		end
 		speed = -1
 		collisionVariable.this.speed = speed		
@@ -76,7 +79,9 @@ function playerHit(params)
 	local params = params or {}
 	local collisionVariable = collisionChecker( params,'eWeapon','player' ) or nil
 	if (collisionVariable) then
-		collisionVariable.obj:hit(  )
+		if (collisionVariable.obj) then
+			collisionVariable.obj:hit(  )
+		end
 	end
 end
 --]

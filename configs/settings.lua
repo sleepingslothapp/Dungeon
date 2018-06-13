@@ -24,14 +24,17 @@ conf = {
 
 --Object Properties [
 player_settings = {
-	speed = -0.55,
+	speed = 0.1	,
 	isMove = false,
 	isAttack = false,
 	flip = 1,
 	properties = {
 		shape={-4,0, 4,0, 4,8, -4,8},
 		filter = { categoryBits=1, maskBits=234 },
-	}
+	},
+	hitpath = "assets/animation/player/player_hit.png",
+	hitW = 32,
+	hitH = 32,
 }
 weapon_settings = {
 	properties = {
@@ -64,6 +67,7 @@ animate = require('utils.animate.app')
 joy_stick = require('utils.joystick.app')
 player_controller = require('utils.controller.movement')
 action_button = require('utils.controller.attack')
+pf = require('utils.playerfunction.app')
 ai = require('utils.ai.app')
 
 collision = require('lib.collision.app')
