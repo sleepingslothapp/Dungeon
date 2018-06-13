@@ -42,7 +42,6 @@ weapon_settings = {
  }
 e_weapon_settings = {
 	properties = {
-		shape = {},
 	 	filter = { categoryBits=128, maskBits=1 },
 	 	isSensor = true
 	 }
@@ -57,17 +56,19 @@ enemy_settings = {
 --]
 require('configs.global')
 -- reuired library [
+json_function = require('lib.json.app')
+model = json.decode(json_function.loadAsset('assets/json/model.json'))
+enemy_stats = json.decode(json_function.loadAsset('assets/json/enemy_stats.json'))
+
 animate = require('utils.animate.app')
 joy_stick = require('utils.joystick.app')
 player_controller = require('utils.controller.movement')
 action_button = require('utils.controller.attack')
 ai = require('utils.ai.app')
 
-json_function = require('lib.json.app')
 collision = require('lib.collision.app')
 
 tiled = require('lib.tiled.app')
 
 
-enemy_stats = json.decode(json_function.loadAsset('assets/json/enemy_stats.json'))
 --]

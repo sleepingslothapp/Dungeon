@@ -2,7 +2,10 @@
 	"enemy_1": {
 		"speed": -0.7,
 		"hp": 5,
+		"hitShadowPath": "assets/animation/enemy/enemy_1/enemy_1_hit.png",
 		"hitW":32,
 		"hitH":32,
+		"sensor":30,
+		"range":10,
 	}
 }

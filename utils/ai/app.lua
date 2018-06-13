@@ -11,6 +11,9 @@ function Object:init( p )
 	obj.isChase = false
 	obj.isAttack = false
 	obj.isRespawn = false
+	obj.eType = p.type
+	
+	p.this.speed = enemy_stats[p.file].speed
 	p.this.id = math.random(0,999)..os.time()..math.random(0,999)
 
 	local xPos = 0
@@ -22,7 +25,7 @@ function Object:init( p )
 	
 	local attackFPS = 0
 
-	obj.hitBox = display.newImageRect( p.this,'assets/img/'..p.file..'.png', enemy_stats[p.file].hitW,enemy_stats[p.file].hitH )
+	obj.hitBox = display.newImageRect( p.this,enemy_stats[p.file].hitShadowPath, enemy_stats[p.file].hitW,enemy_stats[p.file].hitH )
 	obj.hitBox.alpha = 0
 
 
@@ -30,31 +33,33 @@ function Object:init( p )
 	obj.hpBarShadow.fill = {0.5,0.5,0.5}
 	obj.hpBarShadow.anchorX = 1
 	obj.hpBarShadow.anchorY = 0
+	obj.hpBarShadow.alpha = 0
 	obj.hpBar = display.newRect( p.this, 5, 8, 10, 2 )
 	obj.hpBar.anchorX = 1
 	obj.hpBar.anchorY = 0
+	obj.hpBar.alpha = 0
 
 
-	local weaponHolder = display.newRect( p.this, 0, 0, 5, 5 )
+	local weaponHolder = display.newCircle( p.this, 0, 0,  enemy_stats[p.file].range )
 	weaponHolder.alpha = 0
 	weaponHolder.name = 'eWeapon'
 
-	local sensor = display.newCircle( p.this, 0, 0, 30 )
+	local sensor = display.newCircle( p.this, 0, 0,  enemy_stats[p.file].sensor )
 	sensor.alpha = 0
 	sensor.id = p.this.id
 	sensor.obj = obj
 	sensor.this = p.this
 	sensor.name = 'sensor'
-	physics.addBody( sensor, 'static', {isSensor=true,radius=30,filter= { categoryBits=32, maskBits=1 }} )
+	physics.addBody( sensor, 'static', {isSensor=true,radius= enemy_stats[p.file].sensor,filter= { categoryBits=32, maskBits=1 }} )
 
-	local attackRange = display.newCircle( p.this, 0, 0, 10 )
+	local attackRange = display.newCircle( p.this, 0, 0,  enemy_stats[p.file].range )
 	attackRange.alpha = 0
 	attackRange.obj = obj
 	attackRange.this = p.this
 	attackRange.name = 'range'
 	attackRange.sensor = sensor
 	attackRange.weaponHolder = weaponHolder
-	physics.addBody( attackRange, 'static', {isSensor=true,radius=10,filter={ categoryBits=64, maskBits=1 }} )
+	physics.addBody( attackRange, 'static', {isSensor=true,radius= enemy_stats[p.file].range,filter={ categoryBits=64, maskBits=1 }} )
 
 
 	p.map:insertNewObject(sensor)
@@ -88,7 +93,7 @@ function Object:init( p )
 		sensor.x = p.this.x
 		sensor.y = p.this.y + 3
 		attackRange.x = p.this.x
-		attackRange.y = p.this.y + 5
+		attackRange.y = p.this.y
 		weaponHolder.x = p.this.x
 		weaponHolder.y = p.this.y
 		if (obj.isRespawn) then
@@ -119,7 +124,7 @@ function Object:init( p )
 
 	function obj:hit(  )
 		if (isNotDead) then
-			temphp = temphp - 1
+			temphp = temphp - 2
 			obj.hitBox.alpha = 0.8
 			timer.performWithDelay( 100, function (  )
 				obj.hitBox.alpha = 0
@@ -127,6 +132,8 @@ function Object:init( p )
 		end
 		obj.hpBar.xScale = (temphp / orighp) + 0.0001
 		if (temphp <= 0) then
+			obj.hpBar.alpha = 0
+			obj.hpBarShadow.alpha = 0
 			isNotDead = false
 			obj:playSequence(die)
 		end
@@ -134,10 +141,25 @@ function Object:init( p )
 
 	function obj:destroy()
 		Runtime:removeEventListener( "enterFrame", obj )
-		p.this:removeSelf( )
-		sensor:removeSelf( )
-		weaponHolder:removeSelf( )
-		attackRange:removeSelf( )
+			physics.removeBody(sensor)
+			physics.removeBody(attackRange)
+			physics.removeBody(p.this)
+		timer.performWithDelay( 25000, function (  )
+			p.this:removeSelf( )
+			sensor:removeSelf( )
+			weaponHolder:removeSelf( )
+			attackRange:removeSelf( )
+		end ,1 )
+
+	timer.performWithDelay( math.random( 1000,2000 ), function (  )
+		local getPlayerPos1 = p.map:findListType('enemy_respawn')
+		local enemy1 = animate:init({file=p.file,name='enemy'})
+		local pos = math.random(#getPlayerPos1)
+		physics.addBody( enemy1, 'dynamic',enemy_settings.properties )
+		p.map:insertNewObject(enemy1)
+		transition.to(enemy1, {x = getPlayerPos1[pos].x, y = getPlayerPos1[pos].y, time=0})
+		ai:init({this = enemy1,map=p.map,player = p.player,file=p.file,})
+	end ,2 )
 	end
 
 	function obj:enterFrame()
@@ -152,7 +174,9 @@ function Object:init( p )
 		if (sequence == 'attack') then
 			attackFPS = attackFPS + 1
 			if (attackFPS > 9) then
-				e_weapon_settings.properties.shape = {0,-6, (11*obj.flip),-6, (11*obj.flip),10, 0,10}		
+				if (p.type == "M") then
+					e_weapon_settings.properties.radius = enemy_stats[p.file].range
+				end
 				physics.addBody( weaponHolder, 'dynamic',e_weapon_settings.properties )
 			end
 			if (phase == 'ended') then					

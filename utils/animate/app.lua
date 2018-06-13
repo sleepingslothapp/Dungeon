@@ -8,9 +8,9 @@ function Object:init( p )
 	local filename = p.file or 'default'
 	local group_name = p.name or 'default'
 	local group_x = p.x or conf.centerX
-	local group_y = p.y or conf.centerY
+	local group_y = p.y or conf.centerY	
 
-	local p_jsonSheet = json.decode( json_function.loadAsset("assets/animation/sheet/"..filename..".json"))
+	local p_jsonSheet = json.decode( json_function.loadAsset(model[filename].json))
 	local frames = p_jsonSheet.frames
 	local sequenceData = p_jsonSheet.meta
 
@@ -21,7 +21,7 @@ function Object:init( p )
 	group.ID = group_name
 	group.isMove = false
 	group.sheetData = { width=frames[1].sourceSize.w, height=frames[1].sourceSize.h, numFrames=#frames, sheetContentWidth=sequenceData.size.w, sheetContentHeight=sequenceData.size.h }
-	group.sheet = graphics.newImageSheet( "assets/animation/img/"..filename..".png", group.sheetData )
+	group.sheet = graphics.newImageSheet( model[filename].path, group.sheetData )
 	group.animation = set_sequence( group.sequence , group, group.sheet,group.anim,sequenceData,frames)
 
 

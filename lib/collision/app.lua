@@ -1,11 +1,13 @@
 local Object = {}
 
 function onGlobalCollision( event )
-    if ( event.phase == "began" ) then        
+    if ( event.phase == "began" ) then
+    	print( event.object1.name,event.object2.name )
 		enemyChase({event=event,seq1='alert',seq2='walk',time=200,isChase=true})
 		enemyAttack({event=event,isAttack=true,seq1='attack',seq2='walk'})
 		enemyHit({event=event})
-    elseif ( event.phase == "ended" ) then  
+    elseif ( event.phase == "ended" ) then
+    print( event.object1.name,event.object2.name )
 		enemyChase({event=event,seq1='idle',seq2='walk',time=200,isChase=false}) 
 		enemyAttack({event=event,isAttack=false,seq1='walk',seq2='walk'})
 		enemyHit({event=event})
@@ -35,8 +37,8 @@ function enemyChase (params)
 	local params = params or {}
 	local collisionVariable = collisionChecker(params,'player','sensor') or nil
 	if(collisionVariable) then
-		if (collisionVariable.obj.isRespawn) then
 		collisionVariable.obj.isChase = params.isChase	
+		if (collisionVariable.obj.isRespawn) then
 			if (params.isChase) then
 				collisionVariable.obj.isRespawn = true
 				collisionVariable.obj:playSequence(params.seq1)
@@ -69,5 +71,13 @@ function enemyHit(params)
 	end
 end
 --]
-
+--HITTING PLAYER [
+function playerHit(params)
+	local params = params or {}
+	local collisionVariable = collisionChecker( params,'eWeapon','player' ) or nil
+	if (collisionVariable) then
+		collisionVariable.obj:hit(  )
+	end
+end
+--]
 return Object

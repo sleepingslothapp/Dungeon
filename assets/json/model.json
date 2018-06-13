@@ -1,0 +1,21 @@
+{
+	//player model
+	"default": {
+		"path": "assets/animation/player/default/default.png",
+		"json": "assets/animation/player/default/default.json"
+	},
+	//weapon model
+	"sword_1": {
+		"path": "assets/animation/weapon/sword_1/sword_1.png",
+		"json": "assets/animation/weapon/sword_1/sword_1.json"
+	},
+	"sword_2": {
+		"path": "assets/animation/weapon/sword_2/sword_2.png",
+		"json": "assets/animation/weapon/sword_2/sword_2.json"
+	},
+	//enemy model
+	"enemy_1": {
+		"path": "assets/animation/enemy/enemy_1/enemy_1.png",
+		"json": "assets/animation/enemy/enemy_1/enemy_1.json"
+	},
+}

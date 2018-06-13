@@ -10,13 +10,11 @@ function Object:init( p )
 			local phase = event.phase
 			if (phase == 'began' or phase == 'moved') then
 				if (phase == 'began') then
-					player_settings.isAttack = true
-					w.animation:setSequence( 'attack')
-					w.animation:play()
-					button:removeEventListener( 'touch', listener )
-					timer.performWithDelay( 800, function (  )
-						button:addEventListener( 'touch', listener )
-					end ,1 )
+					if (not player_settings.isAttack) then
+						player_settings.isAttack = true
+						w.animation:setSequence( 'attack')
+						w.animation:play()
+					end
 				end
 			end
 		end
@@ -29,7 +27,8 @@ function Object:init( p )
 			if (sequence == 'attack') then
 				attackFPS = attackFPS + 1
 				if (attackFPS > 3) then
-					weapon_settings.properties.shape = {0,-15, (15*player_settings.flip),-15, (15*player_settings.flip),15, 0,15}		
+					button:removeEventListener( 'touch', listener )
+					weapon_settings.properties.shape = {0,-15, (15*player_settings.flip),-15, (15*player_settings.flip),15, (5*player_settings.flip),10}		
 					physics.addBody( w, 'dynamic',weapon_settings.properties )
 				end
 				if (phase == 'ended') then					
@@ -38,6 +37,9 @@ function Object:init( p )
 						w.animation:setSequence( 'idle')
 						w.animation:play()
 					end,1)
+					-- timer.performWithDelay( 800, function (  )
+						button:addEventListener( 'touch', listener )
+					-- end ,1 )
 				end
 			else
 				player_settings.isAttack = false

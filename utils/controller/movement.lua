@@ -27,22 +27,24 @@ function Object:init( p )
 				obj:playSequence('idle',true)
 			end
 		else
-			if (direction == 1) then -- right
-				move_in_angle(player,angle)
-			elseif (direction == 2) then -- up
-				move_in_angle(player,angle)
-			elseif (direction == 3) then -- left
-				move_in_angle(player,angle)
-			elseif (direction == 4) then -- down
-				move_in_angle(player,angle)
-			end
-			if (player_settings.isMove) then
-				obj:playSequence('walk',false)
+			if (not player_settings.isAttack) then
+				if (direction == 1) then -- right
+					move_in_angle(player,angle)
+				elseif (direction == 2) then -- up
+					move_in_angle(player,angle)
+				elseif (direction == 3) then -- left
+					move_in_angle(player,angle)
+				elseif (direction == 4) then -- down
+					move_in_angle(player,angle)
+				end
+				if (player_settings.isMove) then
+					obj:playSequence('walk',false)
+				end				
+				for k,v in pairs(groupObject) do			
+					v.x = player.x
+					v.y = player.y
+				end
 			end				
-			for k,v in pairs(groupObject) do			
-				v.x = player.x
-				v.y = player.y
-			end
 		end
 		if (angle>91 and angle<269) then
 			for k,v in pairs(groupObject) do
