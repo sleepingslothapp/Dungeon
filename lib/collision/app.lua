@@ -2,16 +2,17 @@ local Object = {}
 
 function onGlobalCollision( event )
     if ( event.phase == "began" ) then
-    	print( event.object1.name,event.object2.name )
+    	-- print( event.object1.name,event.object2.name )
 		enemyChase({event=event,seq1='alert',seq2='walk',time=200,isChase=true})
 		enemyAttack({event=event,isAttack=true,seq1='attack',seq2='walk'})
 		enemyHit({event=event})
-		playerHit({event=event})
+		playerHit({event=event,hit=true})
     elseif ( event.phase == "ended" ) then
-    print( event.object1.name,event.object2.name )
+    -- print( event.object1.name,event.object2.name )
 		enemyChase({event=event,seq1='idle',seq2='walk',time=200,isChase=false}) 
 		enemyAttack({event=event,isAttack=false,seq1='walk',seq2='walk'})
 		enemyHit({event=event})
+		playerHit({event=event,hit=false})
     end
 end
  
@@ -38,13 +39,16 @@ function enemyChase (params)
 	local params = params or {}
 	local collisionVariable = collisionChecker(params,'player','sensor') or nil
 	if(collisionVariable) then
-		collisionVariable.obj.isChase = params.isChase	
-		if (collisionVariable.obj.isRespawn) then
-			if (params.isChase) then
-				collisionVariable.obj.isRespawn = true
-				collisionVariable.obj:playSequence(params.seq1)
+		collisionVariable.obj.isChase = params.isChase
+		print("enemyChase:",collisionVariable.obj.isAttack)
+			if (collisionVariable.obj.isRespawn) then
+				if (params.isChase) then
+					collisionVariable.obj.isRespawn = true
+					if (not collisionVariable.obj.isAttacking) then
+						playSequence(collisionVariable.this,params.seq1)
+					end
+				end
 			end
-		end
 	end
 end
 
@@ -54,6 +58,7 @@ function enemyAttack(params)
 	local collisionVariable = collisionChecker( params,'player','range' ) or nil
 	if (collisionVariable) then
 		collisionVariable.obj.isAttack = params.isAttack
+		print("enemyAttack:",collisionVariable.obj.isAttack)
 		if (collisionVariable.obj.isRespawn) then
 			if (collisionVariable.obj.isAttack) then
 				collisionVariable.obj:attack()
@@ -80,7 +85,11 @@ function playerHit(params)
 	local collisionVariable = collisionChecker( params,'eWeapon','player' ) or nil
 	if (collisionVariable) then
 		if (collisionVariable.obj) then
-			collisionVariable.obj:hit(  )
+			-- physics.removeBody(collisionVariable)
+			print(params.hit)
+			if (params.hit) then
+				collisionVariable.obj:hit(  )
+			end
 		end
 	end
 end

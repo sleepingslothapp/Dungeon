@@ -24,7 +24,7 @@ conf = {
 
 --Object Properties [
 player_settings = {
-	speed = 0.1	,
+	speed = -0.5,
 	isMove = false,
 	isAttack = false,
 	flip = 1,

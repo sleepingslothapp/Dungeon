@@ -10,6 +10,7 @@ function Object:init( p )
 	obj.flip = 1
 	obj.isChase = false
 	obj.isAttack = false
+	obj.isAttacking = false
 	obj.isRespawn = false
 	obj.eType = p.type
 	
@@ -68,18 +69,14 @@ function Object:init( p )
 
 	function obj:attack( )
 		if (isNotDead) then	
-			obj:playSequence('attack')
+			playSequence(p.this,'attack')
 		else
-			obj:playSequence(die)
+			playSequence(p.this,die)
 		end
 
 	end
-	function obj:playSequence(seq)		
-		p.this.animation:setSequence( seq)
-		p.this.animation:play()
-	end
 
-	obj:playSequence('respawn')
+	playSequence(p.this,'respawn')
 
 	function obj:actionAI()
 		if (p.this.animation.sequence == 'walk' and obj.isChase ~= true) then
@@ -135,7 +132,7 @@ function Object:init( p )
 			obj.hpBar.alpha = 0
 			obj.hpBarShadow.alpha = 0
 			isNotDead = false
-			obj:playSequence(die)
+			playSequence(p.this,die)
 		end
 	end
 
@@ -172,6 +169,7 @@ function Object:init( p )
 		local phase = event.phase
 		local sequence = target.sequence
 		if (sequence == 'attack') then
+			obj.isAttacking = true
 			attackFPS = attackFPS + 1
 			if (attackFPS > 9) then
 				if (p.type == "M") then
@@ -179,18 +177,26 @@ function Object:init( p )
 				end
 				physics.addBody( weaponHolder, 'dynamic',e_weapon_settings.properties )
 			end
-			if (phase == 'ended') then					
+			if (phase == 'ended') then
+				obj.isAttacking = false
 				physics.removeBody( weaponHolder, 'dynamic' )
 				if (obj.isAttack) then
-					obj:attack()
+					if (not p.player.isDead) then
+						obj:attack()
+					else
+						obj.isAttack = false
+						obj.isChase = false
+						playSequence(p.this,'walk')		
+						p.this.speed = enemy_stats[p.file].speed	
+					end
 				else
-					obj:playSequence('walk')		
+					playSequence(p.this,'walk')		
 					p.this.speed = enemy_stats[p.file].speed	
 				end
 			end
 		elseif (sequence == 'alert') then
 			if (phase == 'ended') then					
-				obj:playSequence('walk')
+				playSequence(p.this,'walk')
 				obj.isChase = true
 			end
 		elseif (sequence == die) then
@@ -200,7 +206,7 @@ function Object:init( p )
 		elseif (sequence == 'respawn') then
 			if (phase == 'ended') then					
 				obj.isRespawn = true
-				obj:playSequence('walk')
+				playSequence(p.this,'walk')
 			end
 		end
 		if (event.phase == 'ended' or event.phase == 'loop') then

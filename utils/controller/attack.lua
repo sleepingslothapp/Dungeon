@@ -12,8 +12,7 @@ function Object:init( p )
 				if (phase == 'began') then
 					if (not player_settings.isAttack) then
 						player_settings.isAttack = true
-						w.animation:setSequence( 'attack')
-						w.animation:play()
+						playSequence(w,'attack')
 					end
 				end
 			end
@@ -34,8 +33,7 @@ function Object:init( p )
 				if (phase == 'ended') then					
 					physics.removeBody( w, 'dynamic' )
 					timer.performWithDelay( 100, function ()
-						w.animation:setSequence( 'idle')
-						w.animation:play()
+					playSequence(w,'idle')
 					end,1)
 					-- timer.performWithDelay( 800, function (  )
 						button:addEventListener( 'touch', listener )

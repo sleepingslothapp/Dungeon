@@ -163,7 +163,7 @@
   "frameTags": [
    { "name": "idle", "from": 0, "to": 3, "direction": "forward" },
    { "name": "walk", "from": 4, "to": 7, "direction": "forward" },
-   { "name": "death", "from": 8, "to": 11, "direction": "forward" },
+   { "name": "die", "from": 8, "to": 11, "direction": "forward" },
    { "name": "attack", "from": 12, "to": 16, "direction": "forward" }
   ],
   "layers": [

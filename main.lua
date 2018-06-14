@@ -5,8 +5,9 @@ local gameMap = tiled:new(mapJson, "map/testmap")
 
 local player = animate:init({file='default',name='player'})
 physics.addBody( player, 'dynamic',player_settings.properties )
-pf:init(player)
+
 local weapon = animate:init({file='sword_1',name='weapon'})
+pf:init(player,weapon)
 
 local joyStick = joy_stick:init({})
 
