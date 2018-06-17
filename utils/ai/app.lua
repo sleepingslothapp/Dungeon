@@ -180,8 +180,8 @@ function Object:init( p )
 			if (phase == 'ended') then
 				obj.isAttacking = false
 				physics.removeBody( weaponHolder, 'dynamic' )
-				if (obj.isAttack) then
-					if (not p.player.isDead) then
+				if (obj.isAttack) then					
+					if (not player_settings.isDead) then
 						obj:attack()
 					else
 						obj.isAttack = false

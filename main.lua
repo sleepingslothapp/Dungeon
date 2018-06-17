@@ -42,5 +42,3 @@ function GameRunTime( event )
 end
 
 Runtime:addEventListener( 'enterFrame', GameRunTime )
-
-

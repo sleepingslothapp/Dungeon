@@ -39,8 +39,8 @@ function enemyChase (params)
 	local params = params or {}
 	local collisionVariable = collisionChecker(params,'player','sensor') or nil
 	if(collisionVariable) then
-		collisionVariable.obj.isChase = params.isChase
-		print("enemyChase:",collisionVariable.obj.isAttack)
+				if (not player_settings.isDead) then
+					collisionVariable.obj.isChase = params.isChase
 			if (collisionVariable.obj.isRespawn) then
 				if (params.isChase) then
 					collisionVariable.obj.isRespawn = true
@@ -49,6 +49,7 @@ function enemyChase (params)
 					end
 				end
 			end
+				end
 	end
 end
 
@@ -61,7 +62,9 @@ function enemyAttack(params)
 		print("enemyAttack:",collisionVariable.obj.isAttack)
 		if (collisionVariable.obj.isRespawn) then
 			if (collisionVariable.obj.isAttack) then
-				collisionVariable.obj:attack()
+				if (not player_settings.isDead) then
+					collisionVariable.obj:attack()
+				end
 			end
 		end
 		speed = -1

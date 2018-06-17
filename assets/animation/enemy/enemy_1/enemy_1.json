@@ -399,7 +399,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.6-x64",
-  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\assets\\animation\\img\\enemy_1.png",
+  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\assets\\animation\\enemy\\enemy_1\\enemy_1.png",
   "format": "RGBA8888",
   "size": { "w": 1408, "h": 32 },
   "scale": "1",

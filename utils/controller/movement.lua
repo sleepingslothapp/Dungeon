@@ -6,7 +6,8 @@ function Object:init( p )
 	local weapon = p.weapon or nil
 	local js = p.js or nil
 	local obj = {}
-	local groupObject = {player,weapon} 	
+	local groupObject = {player,weapon}
+	p.player.controller = obj
 	function obj:playSequence(seq,ismove)
 		for k,v in pairs(groupObject) do			
 			v.animation:setSequence( seq)

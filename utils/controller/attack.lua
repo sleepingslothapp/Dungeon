@@ -10,9 +10,11 @@ function Object:init( p )
 			local phase = event.phase
 			if (phase == 'began' or phase == 'moved') then
 				if (phase == 'began') then
-					if (not player_settings.isAttack) then
-						player_settings.isAttack = true
-						playSequence(w,'attack')
+					if (not player_settings.isDead) then
+						if (not player_settings.isAttack) then
+							player_settings.isAttack = true
+							playSequence(w,'attack')
+						end
 					end
 				end
 			end
@@ -47,6 +49,7 @@ function Object:init( p )
 			end
 		end
 		w.animation:addEventListener( "sprite", spriteListener )
+
 		button:addEventListener( 'touch', listener )
 	end
 

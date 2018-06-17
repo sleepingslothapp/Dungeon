@@ -24,9 +24,10 @@ conf = {
 
 --Object Properties [
 player_settings = {
-	speed = -0.5,
+	speed = 0.5,
 	isMove = false,
 	isAttack = false,
+	isDead = false,
 	flip = 1,
 	properties = {
 		shape={-4,0, 4,0, 4,8, -4,8},

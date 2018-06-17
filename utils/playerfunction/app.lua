@@ -6,7 +6,6 @@ function Object:init( p,w )
 	local orighp = 10;
 	local temphp = orighp;
 	p.obj = obj
-	p.isDead = false
 
 	obj.hp = display.newImageRect('assets/img/hp_bar.png', 46, 4 )
 	obj.hp.x = conf.centerX - obj.hp.width/2
@@ -26,30 +25,30 @@ function Object:init( p,w )
 	
 
 	function obj:hit(  )
-		temphp = temphp - 0.5
-		obj.hitBox.alpha = 0.8
-		obj.hp.xScale = (temphp/orighp) + 0.0001
-		if (temphp <= orighp/2 and temphp > orighp/4 ) then
-			obj.hpcont:setFillColor( convertHexToRGB('#df7126') )
-			obj.hp:setFillColor( convertHexToRGB('#df7126') )
-		elseif (temphp <= orighp/4) then
-			obj.hp:setFillColor( convertHexToRGB('#ac3232') )
-			obj.hpcont:setFillColor( convertHexToRGB('#ac3232') )
-		else
-			obj.hp:setFillColor( convertHexToRGB('#6abe30') )
-			obj.hpcont:setFillColor( convertHexToRGB('#6abe30') )
+		if (not player_settings.isDead) then
+			temphp = temphp - 0.5
+			obj.hitBox.alpha = 0.8
+			obj.hp.xScale = (temphp/orighp) + 0.0001
+			if (temphp <= orighp/2 and temphp > orighp/4 ) then
+				obj.hpcont:setFillColor( convertHexToRGB('#df7126') )
+				obj.hp:setFillColor( convertHexToRGB('#df7126') )
+			elseif (temphp <= orighp/4) then
+				obj.hp:setFillColor( convertHexToRGB('#ac3232') )
+				obj.hpcont:setFillColor( convertHexToRGB('#ac3232') )
+			else
+				obj.hp:setFillColor( convertHexToRGB('#6abe30') )
+				obj.hpcont:setFillColor( convertHexToRGB('#6abe30') )
+			end
+			timer.performWithDelay( 100, function (  )
+				obj.hitBox.alpha = 0
+			end ,1 )			
 		end
-		timer.performWithDelay( 100, function (  )
-			obj.hitBox.alpha = 0
-		end ,1 )
 		
 		if (temphp <= 0) then
-			p.isDead = true
-			-- obj.hpBar.alpha = 0
-			-- obj.hpBarShadow.alpha = 0
-			-- isNotDead = false
+			player_settings.isDead = true
 			playSequence(p,'die')
 			playSequence(w,'die')
+			p.controller:removeRunTime()
 		end
 	end
 	
