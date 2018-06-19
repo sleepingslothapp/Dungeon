@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="7" height="7" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="testmap" tilewidth="16" tileheight="16" tilecount="64" columns="8">
+  <image source="testmap.png" width="128" height="128"/>
+ </tileset>
+ <layer name="floor" width="7" height="7">
+  <data encoding="csv">
+20,20,20,20,20,20,20,
+20,12,12,12,12,12,20,
+20,12,12,12,12,12,20,
+20,12,12,12,12,12,20,
+20,12,12,12,12,12,20,
+20,12,12,12,12,12,20,
+20,20,20,20,20,20,20
+</data>
+ </layer>
+ <layer name="backwall" width="7" height="7">
+  <data encoding="csv">
+0,2,2,2,2,2,0,
+2,10,10,10,10,10,0,
+10,0,0,0,0,0,0,
+2,0,0,0,0,0,0,
+10,2,2,2,2,2,0,
+0,10,10,10,10,10,0,
+0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="frontwall" width="7" height="7">
+  <data encoding="csv">
+0,0,0,0,0,0,0,
+0,6,0,0,0,4,0,
+0,0,0,0,0,4,0,
+12,0,0,0,0,4,0,
+0,6,0,0,0,4,0,
+0,0,0,0,0,0,0,
+0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>
