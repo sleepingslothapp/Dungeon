@@ -2,8 +2,8 @@ local physics = require "physics"
 
 local M = {}
 
-local screenWidth =display.actualContentWidth
-local screenHeight =display.actualContentHeight
+local screenWidth = display.actualContentWidth
+local screenHeight = display.actualContentHeight
 
 local centerX = display.contentCenterX
 local centerY = display.contentCenterY
