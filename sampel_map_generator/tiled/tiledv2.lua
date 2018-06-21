@@ -39,7 +39,7 @@ function M:new(arrayData,room,dir)
 	
 	
 	for ad = 1, #arrayData do
-		table.insert(data,require('tmx_tiles.'..arrayData[ad]))
+		table.insert(data,require('tmx_tiles2.'..arrayData[ad]))
 	end	
 	
 	-- insert new object in tile map

@@ -10,11 +10,11 @@ local room_check = 1
 local starting_room = math.random(4)
 for column=1,4 do
 	for row=0,3 do
-		local tempt = display.newRect( 0,0, 112, 112 )
+		local tempt = display.newRect( 0,0, 320, 320 )
 		tempt.isSelect = false
 		tempt:setFillColor( 0.1 )
-		tempt.x = tempt.x + (row*112) + 56
-		tempt.y = tempt.y + (column*112) - 56
+		tempt.x = tempt.x + (row*320) + 160
+		tempt.y = tempt.y + (column*320) - 160
 		table.insert( tempRoom, tempt )
 	end
 end
