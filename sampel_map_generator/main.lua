@@ -16,7 +16,7 @@ end
 display.setDefault( "background",convertHexToRGB('#e4eef0') )
 
 local gameMap = tiledv2:new(mg.roomNameArray,mg.roomArray,"tmx_tiles2")
-local pl = display.newRect( 0, 0, 15, 15 )
+local pl = display.newImageRect( 'pl.png', 35, 35 )
 local joyStick = js:init({})
 local playerController = ms:init({player=pl,js=joyStick})
 playerController:initRunTime()

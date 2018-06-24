@@ -11,6 +11,8 @@ local centerY = display.contentCenterY
 local sheets = { frames ={}}
 local frame = {}
 
+local scaleVal = 2
+
 
 function string:splits( inSplitPattern )
     local outResults = {}
@@ -52,8 +54,8 @@ function M:new(arrayData,room,dir)
 	end
 	-- keep player on center
 	function map:centerObject(obj)
-		mapAll.x = centerX - obj.x
-		mapAll.y = centerY - obj.y
+		mapAll.x = centerX - (obj.x*scaleVal)
+		mapAll.y = centerY - (obj.y*scaleVal)
 	end
 	
 	for m = 1, #data do
@@ -106,6 +108,9 @@ function M:new(arrayData,room,dir)
 		
 	end
 	
+
+	mapAll.xScale = scaleVal	
+	mapAll.yScale = scaleVal	
 	return map
 end
 
