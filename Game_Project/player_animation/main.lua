@@ -16,27 +16,29 @@ local sheetOptions =
 {
     width = 64,
     height = 64,
-    numFrames = 23
+    numFrames = 29
 }
 local sheet_runningCat = graphics.newImageSheet( "newanimation.png", sheetOptions )
 -- sequences table
 local sequences_runningCat = {
     -- consecutive frames sequence
-    {name = "atk_combo_1",start = 1,count = 5,time = 400,loopCount = 1,loopDirection = "forward"},
-    {name = "atk_combo_2",start = 6,count = 5,time = 400,loopCount = 1,loopDirection = "forward"},
-    {name = "atk_combo_3",start = 11,count = 5,time = 400,loopCount = 1,loopDirection = "forward"},
+    {name = "attack_1",start = 1,count = 5,time = 400,loopCount = 1,loopDirection = "forward"},
+    {name = "attack_2",start = 6,count = 5,time = 400,loopCount = 1,loopDirection = "forward"},
+    {name = "attack_3",start = 11,count = 5,time = 400,loopCount = 1,loopDirection = "forward"},
     {name = "idle",start = 16,count = 4,time = 400,loopCount = 0,loopDirection = "forward"},
     {name = "walk",start = 20,count = 4,time = 400,loopCount = 0,loopDirection = "forward"},
+    {name = "death",start = 24,count = 6,time = 600,loopCount = 1,loopDirection = "forward"},
 }
 
 local runningCat = display.newSprite( sheet_runningCat, sequences_runningCat )
 runningCat.x = centerX
 runningCat.y = centerY
+runningCat:setSequence( "idle" )  -- switch to "fastRun" sequence
+runningCat:play()
 
 
-
-runningCat.xScale = 3
-runningCat.yScale = 3
+runningCat.xScale = 2.5
+runningCat.yScale = 2.5
 
 local widget = require( "widget" )
 local attc = 1
@@ -51,13 +53,16 @@ local function handleButtonEvent( event )
  		elseif ( "button2" == id) then
  			runningCat:setSequence( "walk" )  -- switch to "fastRun" sequence
 			runningCat:play()
- 		elseif ( "button3" == id) then
- 			runningCat:setSequence( "atk_combo_"..attc )  -- switch to "fastRun" sequence
+        elseif ( "button3" == id) then
+            runningCat:setSequence( "attack_"..attc )  -- switch to "fastRun" sequence
+            runningCat:play()
+            attc = attc + 1
+            if ( attc == 4) then
+                attc = 1
+            end
+ 		elseif ( "button4" == id) then
+ 			runningCat:setSequence( "death" )  -- switch to "fastRun" sequence
 			runningCat:play()
-			attc = attc + 1
-			if ( attc == 4) then
-				attc = 1
-			end
  		end
     elseif ( "ended" == phase ) then
         print( "Button was pressed and released" )
@@ -91,6 +96,16 @@ local button3 = widget.newButton(
         top = 200,
         id = "button3",
         label = "attack",
+        onEvent = handleButtonEvent
+    }
+)
+-- Create the widget
+local button4 = widget.newButton(
+    {
+        left = 300,
+        top = 200,
+        id = "button4",
+        label = "die",
         onEvent = handleButtonEvent
     }
 )
