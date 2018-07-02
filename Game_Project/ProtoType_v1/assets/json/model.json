@@ -1,0 +1,18 @@
+{
+	//player model
+	"player": {
+		"0": {
+			"id": 0,
+			"sheet": "assets/animation/player/default/default.png",
+			"json": "assets/animation/player/default/default.json"
+		}
+	},
+	//weapon model
+	"weapons": {
+		"0": {
+			"id": 0,
+			"sheet": "assets/animation/weapons/default/default.png",
+			"json": "assets/animation/weapons/default/default.json"
+		}
+	},
+}
