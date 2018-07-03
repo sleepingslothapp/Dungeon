@@ -16,6 +16,11 @@ function Object:convertHexToRGB(hexCode)
    local hexCode = hexCode:gsub("#","")
    return tonumber("0x"..hexCode:sub(1,2))/255,tonumber("0x"..hexCode:sub(3,4))/255,tonumber("0x"..hexCode:sub(5,6))/255;
 end
+-- play sprite in sequence
+function playSequence(obj,seq)		
+	obj.animation:setSequence( seq)
+	obj.animation:play()
+end
 -- Set Sheet Sequence
 function set_sequence( seq , group, sheet,animation,meta,frames)
 	local loopCountValue = 1
@@ -27,6 +32,9 @@ function set_sequence( seq , group, sheet,animation,meta,frames)
 		return result
 	end
 	for i=1,#meta.frameTags do
+		if (meta.frameTags[i].name:sub( 1,7 ) == 'attack_') then
+			group.attackPatternCount = group.attackPatternCount + 1
+		end
 		if (meta.frameTags[i].name == "walk" or meta.frameTags[i].name == "idle") 
 		then loopCountValue = 0; 
 		else loopCountValue = 1; end
@@ -58,6 +66,7 @@ function Object:animate(params)
 	local sequenceData = JsonSheet.meta
 
 	group.sequence = {}
+	group.attackPatternCount = 0
 	group.anim = ""
 	group.animation = ""
 	group.name = group_name
@@ -82,6 +91,17 @@ function Object:animate(params)
 	group:play()
 	
 	return group
+end
+-- move object in angle
+function move_in_angle(object,angle)
+		local movementScale = {}
+		movementScale.x = math.cos( math.rad( angle - 0 ) )
+		movementScale.y = math.sin( math.rad( angle - 0 ) )
+		local velocity = {}
+		velocity.x = movementScale.x * -0.1
+		velocity.y = movementScale.y * -0.1
+		object.x = object.x + movementScale.x  + velocity.x
+		object.y = object.y + movementScale.y*-1  - velocity.y
 end
 
 return Object

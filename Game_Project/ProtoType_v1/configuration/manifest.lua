@@ -1,7 +1,7 @@
 composer = require ('composer')
 json = require ('json')
 JsonUtils = require ('utils.json_utils')
-joy_stick = require ('utils.controller.app')
+Controller = require ('utils.controller.app')
 ExternalFunction = require ('configuration.ExternalFunction')
 	ExternalFunction.JsonUtils = JsonUtils
 
@@ -17,9 +17,10 @@ display.setDefault( "background",ExternalFunction:convertHexToRGB('#00ffff') )
 display.setDefault("magTextureFilter", "nearest")
 display.setDefault("minTextureFilter", "nearest")
 
+local player = ExternalFunction:animate({})
+local weapon = ExternalFunction:animate({model="weapons"})
 
-ExternalFunction:animate({})
-ExternalFunction:animate({model="weapons"})
+Controller:d_pad({})
+Controller:attack_button({player,weapon})
+Controller:addController({player,weapon})
 
-joy_stick:d_pad({})
-joy_stick:attack_button({})
