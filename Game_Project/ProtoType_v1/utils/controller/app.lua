@@ -1,6 +1,39 @@
 local Object = {}
 
 Object.dPad = nil
+
+function Object:init( params )	
+	Object:d_pad({})
+	Object:attack_button(params)
+	Object:addController(params)
+	Object:spriteevent(params)
+end
+function spriteListener ( event )
+	local phase = event.phase
+	local sequence = event.target.sequence
+	local this = event.target
+	if (sequence == "attack_1" or sequence == "attack_2" or sequence == "attack_3") then
+		if (phase == 'ended') then
+			this.isAttacking = false
+			if (this.isMove) then
+				playSequenceSprite({this},'idle')
+				this.isMove = true
+			else							
+				playSequenceSprite({this},'walk')
+				this.isMove = false
+			end
+			-- this.isMove = true
+			-- print( this.isMove )
+		end
+	end
+	-- print( event.name, event.target.isAttacking, event.phase, event.target.sequence )
+end
+
+function Object:spriteevent( groupObject )
+	for k,v in pairs(groupObject) do
+		v.animation:addEventListener( "sprite", spriteListener )
+	end
+end
 -- create direction pad
 function Object:d_pad()
 	local group = display.newGroup()
@@ -79,16 +112,19 @@ function Object:attack_button(groupObject)
 	
 	function group:touch(event) 
 		local phase = event.phase
-		if( (phase=='began') or (phase=="moved") ) then
-			attackCount = attackCount + 1
-			for k,v in pairs(groupObject) do			
-				playSequence(v,'attack_'..attackCount)
-				print('attack_'..attackCount)
-				if (attackCount > v.attackPatternCount) then
-					attackCount = 1
+		local patternCount = 1
+		if( (phase=='began')) then			
+			if (not groupObject[1].animation.isAttacking) then
+				attackCount = attackCount + 1
+				for k,v in pairs(groupObject) do			
+					v.animation.isAttacking = true
 				end
-			end			
-			
+				playSequence(groupObject,'attack_'..attackCount)
+				patternCount = groupObject[1].attackPatternCount
+				if (attackCount >= patternCount) then
+					attackCount = 0
+				end
+			end	
 		end
 	end
 	group:addEventListener('touch',group)
@@ -96,31 +132,32 @@ end
 -- add controller function
 function Object:addController( groupObject )
 	local obj = {}
-	local isObjectMove = false
-	
-	function obj:playSequence(seq,ismove)
-		for k,v in pairs(groupObject) do			
-			v.animation:setSequence( seq)
-			v.animation:play()
-		end
-		isObjectMove = ismove
-	end
 	function moveObject(angle)
 		for k,v in pairs(groupObject) do			
 			move_in_angle(v,angle)
+		end
+	end
+	function isMoving(groupObject,bool)
+		for k,v in pairs(groupObject) do			
+			v.animation.isMove = bool
 		end
 	end
 	function obj:runtime(event)
 		local direction = Object.dPad:getDirection()
 		local angle = Object.dPad:getAngle()
 		if (direction == 0) then
-			if (not isObjectMove) then
-				obj:playSequence('idle',true)
+			if (not groupObject[1].animation.isAttacking) then
+				if (not groupObject[1].animation.isMove) then
+					playSequence(groupObject,'idle')
+					isMoving(groupObject,true)
+				end
 			end
 		else
-			if (isObjectMove) then
-				obj:playSequence('walk',false)
-			end
+			if (not groupObject[1].animation.isAttacking) then
+				if (groupObject[1].animation.isMove) then
+					playSequence(groupObject,'walk')
+					isMoving(groupObject,false)
+				end
 				if (direction == 1) then -- right
 					moveObject(angle)
 				elseif (direction == 2) then -- up
@@ -130,14 +167,17 @@ function Object:addController( groupObject )
 				elseif (direction == 4) then -- down
 					moveObject(angle)
 				end
-		end
-		if (angle>91 and angle<269) then
-			for k,v in pairs(groupObject) do
-				v.xScale = -2
 			end
-		elseif (angle ~= 0) then	
-			for k,v in pairs(groupObject) do
-				v.xScale = 2
+		end
+		if (not groupObject[1].animation.isAttacking) then
+			if (angle>91 and angle<269) then
+				for k,v in pairs(groupObject) do
+					v.xScale = -2
+				end
+			elseif (angle ~= 0) then	
+				for k,v in pairs(groupObject) do
+					v.xScale = 2
+				end
 			end
 		end
 	end

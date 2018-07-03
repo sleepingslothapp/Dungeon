@@ -255,7 +255,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.8-x64",
-  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\Game_Project\\character_prototype_controller\\assets\\animation\\weapons\\default\\default.png",
+  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\weapons\\default\\default.png",
   "format": "RGBA8888",
   "size": { "w": 1792, "h": 64 },
   "scale": "1",

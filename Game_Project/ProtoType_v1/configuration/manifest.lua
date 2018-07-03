@@ -13,14 +13,12 @@ gameCenterY = display.contentCenterY
 system.activate( "multitouch" )
 display.setStatusBar( display.HiddenStatusBar )
 display.setDefault( "background",ExternalFunction:convertHexToRGB('#e4eef0') )
-display.setDefault( "background",ExternalFunction:convertHexToRGB('#00ffff') )
+-- display.setDefault( "background",ExternalFunction:convertHexToRGB('#00ffff') )
 display.setDefault("magTextureFilter", "nearest")
 display.setDefault("minTextureFilter", "nearest")
 
-local player = ExternalFunction:animate({})
-local weapon = ExternalFunction:animate({model="weapons"})
 
-Controller:d_pad({})
-Controller:attack_button({player,weapon})
-Controller:addController({player,weapon})
+local player = ExternalFunction:animate({isPlayer=true,})
+local weapon = ExternalFunction:animate({isPlayer=true,model="weapons"})
+Controller:init({player,weapon})
 

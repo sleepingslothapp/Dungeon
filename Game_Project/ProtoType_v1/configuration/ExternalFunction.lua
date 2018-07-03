@@ -17,9 +17,17 @@ function Object:convertHexToRGB(hexCode)
    return tonumber("0x"..hexCode:sub(1,2))/255,tonumber("0x"..hexCode:sub(3,4))/255,tonumber("0x"..hexCode:sub(5,6))/255;
 end
 -- play sprite in sequence
-function playSequence(obj,seq)		
-	obj.animation:setSequence( seq)
-	obj.animation:play()
+function playSequence(groupObject,seq)		
+	for k,v in pairs(groupObject) do			
+		v.animation:setSequence( seq)
+		v.animation:play()
+	end
+end
+function playSequenceSprite(groupObject,seq)		
+	for k,v in pairs(groupObject) do			
+		v:setSequence(seq)
+		v:play()
+	end
 end
 -- Set Sheet Sequence
 function set_sequence( seq , group, sheet,animation,meta,frames)
@@ -76,7 +84,6 @@ function Object:animate(params)
 	group.sheet = graphics.newImageSheet( modelJson[model][id].sheet, group.sheetData )
 	group.animation = set_sequence( group.sequence , group, group.sheet,group.anim,sequenceData,frames)
 
-
 	function group:play()
 		seqName = 'idle'
 		group.animation:setSequence( seqName)
@@ -89,6 +96,9 @@ function Object:animate(params)
 	group.xScale = 2
 	group.yScale = 2
 	group:play()
+
+	group.animation.isMove = false
+	group.animation.isAttacking = false
 	
 	return group
 end
