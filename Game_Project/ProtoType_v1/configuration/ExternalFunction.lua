@@ -40,9 +40,6 @@ function set_sequence( seq , group, sheet,animation,meta,frames)
 		return result
 	end
 	for i=1,#meta.frameTags do
-		if (meta.frameTags[i].name:sub( 1,7 ) == 'attack_') then
-			group.attackPatternCount = group.attackPatternCount + 1
-		end
 		if (meta.frameTags[i].name == "walk" or meta.frameTags[i].name == "idle") 
 		then loopCountValue = 0; 
 		else loopCountValue = 1; end
@@ -66,6 +63,7 @@ function Object:animate(params)
 	local group = display.newGroup( )
 	local id = p.id or "0"
 	local model = p.model or "player"
+	local type = p.type or "dslash"
 	local group_x = p.x or gameCenterX
 	local group_y = p.y or gameCenterY	
 
@@ -74,7 +72,6 @@ function Object:animate(params)
 	local sequenceData = JsonSheet.meta
 
 	group.sequence = {}
-	group.attackPatternCount = 0
 	group.anim = ""
 	group.animation = ""
 	group.name = group_name
@@ -99,6 +96,8 @@ function Object:animate(params)
 
 	group.animation.isMove = false
 	group.animation.isAttacking = false
+	group.animation.model = model
+	group.animation.type = type
 	
 	return group
 end

@@ -6,13 +6,13 @@ function Object:init( params )
 	Object:d_pad({})
 	Object:attack_button(params)
 	Object:addController(params)
-	Object:spriteevent(params)
+	Object:spriteAddEvent(params)
 end
 function spriteListener ( event )
 	local phase = event.phase
 	local sequence = event.target.sequence
 	local this = event.target
-	if (sequence == "attack_1" or sequence == "attack_2" or sequence == "attack_3") then
+	if (sequence:sub( 1,7 ) == "attack_") then
 		if (phase == 'ended') then
 			this.isAttacking = false
 			if (this.isMove) then
@@ -27,7 +27,7 @@ function spriteListener ( event )
 	-- print( event.name, event.target.isAttacking, event.phase, event.target.sequence )
 end
 
-function Object:spriteevent( groupObject )
+function Object:spriteAddEvent( groupObject )
 	for k,v in pairs(groupObject) do
 		v.animation:addEventListener( "sprite", spriteListener )
 	end
@@ -111,15 +111,22 @@ function Object:attack_button(groupObject)
 	function group:touch(event) 
 		local phase = event.phase
 		local patternCount = 1
+		local lastAttack = ''
 		if( (phase=='began')) then			
 			if (not groupObject[1].animation.isAttacking) then
 				attackCount = attackCount + 1
 				for k,v in pairs(groupObject) do			
 					v.animation.isAttacking = true
+					if (v.animation.model == 'weapons') then
+						lastAttack = v.animation.type
+					end
 				end
-				playSequence(groupObject,'attack_'..attackCount)
-				patternCount = groupObject[1].attackPatternCount
-				if (attackCount >= patternCount) then
+				if (attackCount == 3) then
+					playSequence(groupObject,'attack_'..lastAttack)
+				else
+					playSequence(groupObject,'attack_'..attackCount)
+				end
+				if (attackCount >= 3) then
 					attackCount = 0
 				end
 			end	
