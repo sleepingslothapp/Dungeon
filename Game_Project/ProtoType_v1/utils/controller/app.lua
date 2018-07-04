@@ -22,8 +22,6 @@ function spriteListener ( event )
 				playSequenceSprite({this},'walk')
 				this.isMove = false
 			end
-			-- this.isMove = true
-			-- print( this.isMove )
 		end
 	end
 	-- print( event.name, event.target.isAttacking, event.phase, event.target.sequence )

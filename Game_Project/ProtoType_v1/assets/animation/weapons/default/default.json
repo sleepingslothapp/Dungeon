@@ -254,8 +254,8 @@
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.8-x64",
-  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\weapons\\default\\default.png",
+  "version": "1.2.6",
+  "image": "C:\\Users\\Admin\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\weapons\\default\\default.png",
   "format": "RGBA8888",
   "size": { "w": 1792, "h": 64 },
   "scale": "1",
