@@ -186,7 +186,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 80
    },
    {
     "filename": "player 21.ase",
@@ -195,7 +195,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 80
    },
    {
     "filename": "player 22.ase",
@@ -204,7 +204,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 80
    },
    {
     "filename": "player 23.ase",
@@ -213,7 +213,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 80
    },
    {
     "filename": "player 24.ase",
@@ -222,7 +222,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 80
    },
    {
     "filename": "player 25.ase",
@@ -231,7 +231,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 26.ase",
@@ -240,7 +240,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 27.ase",
@@ -249,7 +249,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 28.ase",
@@ -258,7 +258,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 29.ase",
@@ -295,23 +295,69 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
     "duration": 100
+   },
+   {
+    "filename": "player 33.ase",
+    "frame": { "x": 2112, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 34.ase",
+    "frame": { "x": 2176, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 35.ase",
+    "frame": { "x": 2240, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 36.ase",
+    "frame": { "x": 2304, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 37.ase",
+    "frame": { "x": 2368, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
    }
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.8-x64",
-  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\player\\default\\default.png",
+  "version": "1.2.6",
+  "image": "C:\\Users\\Admin\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\player\\default\\default.png",
   "format": "RGBA8888",
-  "size": { "w": 2112, "h": 64 },
+  "size": { "w": 2432, "h": 64 },
   "scale": "1",
   "frameTags": [
    { "name": "attack_1", "from": 0, "to": 4, "direction": "forward" },
    { "name": "attack_2", "from": 5, "to": 9, "direction": "forward" },
    { "name": "attack_dslash", "from": 10, "to": 14, "direction": "forward" },
    { "name": "attack_uslash", "from": 15, "to": 19, "direction": "forward" },
-   { "name": "idle", "from": 20, "to": 23, "direction": "forward" },
-   { "name": "walk", "from": 24, "to": 27, "direction": "forward" },
-   { "name": "death", "from": 28, "to": 32, "direction": "forward" }
+   { "name": "attack_thrust", "from": 20, "to": 24, "direction": "forward" },
+   { "name": "idle", "from": 25, "to": 28, "direction": "forward" },
+   { "name": "walk", "from": 29, "to": 32, "direction": "forward" },
+   { "name": "death", "from": 33, "to": 37, "direction": "forward" }
   ],
   "layers": [
    { "name": "player", "opacity": 255, "blendMode": "normal" }

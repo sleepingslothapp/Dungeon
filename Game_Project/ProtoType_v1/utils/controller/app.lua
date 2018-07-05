@@ -122,6 +122,7 @@ function Object:attack_button(groupObject)
 					end
 				end
 				if (attackCount == 3) then
+					local lastArr = {'dslash','uslash','thrust'}
 					playSequence(groupObject,'attack_'..lastAttack)
 				else
 					playSequence(groupObject,'attack_'..attackCount)
