@@ -19,6 +19,9 @@ display.setDefault("minTextureFilter", "nearest")
 
 
 local player = ExternalFunction:animate({isPlayer=true,})
-local weapon = ExternalFunction:animate({isPlayer=true,model="weapons",type="thrust"})
+-- local weapon = ExternalFunction:animate({isPlayer=true,model="weapons",type="dslash",id="1"})
+-- local weapon = ExternalFunction:animate({isPlayer=true,model="weapons",type="dslash",id="2"})
+-- local weapon = ExternalFunction:animate({isPlayer=true,model="weapons",type="thrust",id="3"})
+local weapon = ExternalFunction:animate({isPlayer=true,model="weapons",type="thrust",id="4"})
 Controller:init({player,weapon})
 

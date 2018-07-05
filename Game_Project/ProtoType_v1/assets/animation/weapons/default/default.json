@@ -240,7 +240,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 100
    },
    {
     "filename": "player 27.ase",
@@ -249,7 +249,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 80
    },
    {
     "filename": "player 28.ase",
@@ -258,7 +258,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 80
    },
    {
     "filename": "player 29.ase",
@@ -267,7 +267,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 80
    },
    {
     "filename": "player 30.ase",
@@ -276,7 +276,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 31.ase",
@@ -285,7 +285,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 32.ase",
@@ -294,7 +294,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 33.ase",
@@ -303,7 +303,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 150
    },
    {
     "filename": "player 34.ase",
@@ -340,14 +340,59 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
     "duration": 100
+   },
+   {
+    "filename": "player 38.ase",
+    "frame": { "x": 2432, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 39.ase",
+    "frame": { "x": 2496, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 40.ase",
+    "frame": { "x": 2560, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 41.ase",
+    "frame": { "x": 2624, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   {
+    "filename": "player 42.ase",
+    "frame": { "x": 2688, "y": 0, "w": 64, "h": 64 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
    }
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.6",
-  "image": "C:\\Users\\Admin\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\weapons\\default\\default.png",
+  "version": "1.2.8-x64",
+  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\weapons\\default\\default.png",
   "format": "RGBA8888",
-  "size": { "w": 2432, "h": 64 },
+  "size": { "w": 2752, "h": 64 },
   "scale": "1",
   "frameTags": [
    { "name": "attack_1", "from": 0, "to": 4, "direction": "forward" },
@@ -355,9 +400,10 @@
    { "name": "attack_dslash", "from": 10, "to": 14, "direction": "forward" },
    { "name": "attack_uslash", "from": 15, "to": 19, "direction": "forward" },
    { "name": "attack_thrust", "from": 20, "to": 24, "direction": "forward" },
-   { "name": "idle", "from": 25, "to": 28, "direction": "forward" },
-   { "name": "walk", "from": 29, "to": 32, "direction": "forward" },
-   { "name": "death", "from": 33, "to": 37, "direction": "forward" }
+   { "name": "attack_slam", "from": 25, "to": 29, "direction": "forward" },
+   { "name": "idle", "from": 30, "to": 33, "direction": "forward" },
+   { "name": "walk", "from": 34, "to": 37, "direction": "forward" },
+   { "name": "death", "from": 38, "to": 42, "direction": "forward" }
   ],
   "layers": [
    { "name": "object", "group": "weapon", "opacity": 255, "blendMode": "normal" },

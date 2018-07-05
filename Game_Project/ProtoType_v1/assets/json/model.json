@@ -13,6 +13,26 @@
 			"id": 0,
 			"sheet": "assets/animation/weapons/default/default.png",
 			"json": "assets/animation/weapons/default/default.json"
+		},
+		"1": {
+			"id": 1,
+			"sheet": "assets/animation/weapons/dslash1/dslash1.png",
+			"json": "assets/animation/weapons/dslash1/dslash1.json"
+		},
+		"2": {
+			"id": 2,
+			"sheet": "assets/animation/weapons/dslash2/dslash2.png",
+			"json": "assets/animation/weapons/dslash2/dslash2.json"
+		},
+		"3": {
+			"id": 3,
+			"sheet": "assets/animation/weapons/thrust1/thrust1.png",
+			"json": "assets/animation/weapons/thrust1/thrust1.json"
+		},
+		"4": {
+			"id": 4,
+			"sheet": "assets/animation/weapons/thrust2/thrust2.png",
+			"json": "assets/animation/weapons/thrust2/thrust2.json"
 		}
 	},
 }
