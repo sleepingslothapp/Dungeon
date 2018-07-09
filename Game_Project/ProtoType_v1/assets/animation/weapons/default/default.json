@@ -231,7 +231,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 150
+    "duration": 80
    },
    {
     "filename": "player 26.ase",
@@ -240,7 +240,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 100
+    "duration": 80
    },
    {
     "filename": "player 27.ase",
@@ -406,9 +406,7 @@
    { "name": "death", "from": 38, "to": 42, "direction": "forward" }
   ],
   "layers": [
-   { "name": "object", "group": "weapon", "opacity": 255, "blendMode": "normal" },
-   { "name": "effect", "group": "weapon", "opacity": 166, "blendMode": "normal" },
-   { "name": "weapon" }
+   { "name": "player", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]

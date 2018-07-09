@@ -231,7 +231,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 80
+    "duration": 150
    },
    {
     "filename": "player 26.ase",
@@ -240,7 +240,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 64, "h": 64 },
     "sourceSize": { "w": 64, "h": 64 },
-    "duration": 80
+    "duration": 100
    },
    {
     "filename": "player 27.ase",

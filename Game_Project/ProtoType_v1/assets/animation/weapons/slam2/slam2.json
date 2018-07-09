@@ -390,7 +390,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.8-x64",
-  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\player\\default\\default.png",
+  "image": "C:\\Users\\Kyle\\Documents\\Corona Projects\\Dungeon\\Game_Project\\ProtoType_v1\\assets\\animation\\weapons\\slam2\\slam2.png",
   "format": "RGBA8888",
   "size": { "w": 2752, "h": 64 },
   "scale": "1",
@@ -406,7 +406,9 @@
    { "name": "death", "from": 38, "to": 42, "direction": "forward" }
   ],
   "layers": [
-   { "name": "player", "opacity": 255, "blendMode": "normal" }
+   { "name": "object", "group": "weaponslam2", "opacity": 255, "blendMode": "normal" },
+   { "name": "effect", "group": "weaponslam2", "opacity": 166, "blendMode": "normal" },
+   { "name": "weaponslam2" }
   ],
   "slices": [
   ]

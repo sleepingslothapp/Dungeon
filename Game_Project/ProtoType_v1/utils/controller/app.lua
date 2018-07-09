@@ -178,11 +178,11 @@ function Object:addController( groupObject )
 		if (not groupObject[1].animation.isAttacking) then
 			if (angle>91 and angle<269) then
 				for k,v in pairs(groupObject) do
-					v.xScale = -2
+					v.xScale = -gameScale
 				end
 			elseif (angle ~= 0) then	
 				for k,v in pairs(groupObject) do
-					v.xScale = 2
+					v.xScale = gameScale
 				end
 			end
 		end

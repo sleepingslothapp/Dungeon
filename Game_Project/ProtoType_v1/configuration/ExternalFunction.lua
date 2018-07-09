@@ -90,8 +90,8 @@ function Object:animate(params)
 	group.x = group_x
 	group.y = group_y
 
-	group.xScale = 2
-	group.yScale = 2
+	group.xScale = gameScale
+	group.yScale = gameScale
 	group:play()
 
 	group.animation.isMove = false

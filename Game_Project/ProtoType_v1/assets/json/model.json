@@ -33,6 +33,16 @@
 			"id": 4,
 			"sheet": "assets/animation/weapons/thrust2/thrust2.png",
 			"json": "assets/animation/weapons/thrust2/thrust2.json"
+		},
+		"5": {
+			"id": 5,
+			"sheet": "assets/animation/weapons/slam1/slam1.png",
+			"json": "assets/animation/weapons/slam1/slam1.json"
+		},
+		"6": {
+			"id": 6,
+			"sheet": "assets/animation/weapons/slam2/slam2.png",
+			"json": "assets/animation/weapons/slam2/slam2.json"
 		}
 	},
 }
