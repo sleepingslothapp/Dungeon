@@ -5,7 +5,7 @@ composer.gotoScene( "Home" )
 
 -- sample map
 local group = display.newGroup( )
-local grid = 3
+local grid = 31
 local SR = math.round(grid/2)
 local SRT = "TLBR"
 group.tileArray = {}
@@ -14,7 +14,7 @@ group.tileArrayTemp = {}
 for a=1,grid do
 	for b=1,grid do
 		local tileTemp = display.newImage(group, 'assets/images/minimap/BLOCK.png' ,16*a,16*b )
-		tileTemp.alpha = 0.05
+		-- tileTemp.alpha = 0.05
 		table.insert(group.tileArrayTemp,{(16*a),(16*b),false,tileTemp})
 	end
 	table.insert(group.tileArray,group.tileArrayTemp)
@@ -37,6 +37,7 @@ function checkRoom(p)
 	checkPost(getPost,p.currentPos,p.filename)
 	
 end
+local xxx = 1
 
 function showroom( rms,n1,n2 )
 	local rm = rms
@@ -44,6 +45,8 @@ function showroom( rms,n1,n2 )
 	group.tileArray[n1][n2][4]:removeSelf()
 	group.tileArray[n1][n2][4] = display.newImage(group, 'assets/images/minimap/'..rm..'.png' ,group.tileArray[n1][n2][1],group.tileArray[n1][n2][2] )
 	group.tileArray[n1][n2][3] = true
+	display.newText(group,xxx, group.tileArray[n1][n2][1], group.tileArray[n1][n2][2], native.systemFont, 10 )
+	xxx = xxx + 1
 	checkRoom({filename = rm, currentPos = {n1,n2}})
 end
 
@@ -52,45 +55,49 @@ function checkPost(post,currentPos,rm)
 	local n2 = currentPos[2];
 	for lp = 1 , #post do
 		if post[lp] == 'T' then
-			timer.performWithDelay(100,function () 
+			-- timer.performWithDelay(100,function () 
 					if not group.tileArray[n1][n2-1][3] then
 						if n2-1 ~= 1 then
 							showroom( {"TB","B","BR"},n1,n2-1 )
 						else
-							showroom( {"B","BR"},n1,n2-1 )
+							showroom( {"B"},n1,n2-1 )
+							-- showroom( {"B","BR"},n1,n2-1 )
 						end
 					end
-				end,1)
+				-- end,1)
 		elseif post[lp] == 'L' then	
-			timer.performWithDelay(120,function () 
+			-- timer.performWithDelay(200,function () 
 					if not group.tileArray[n1+1][n2][3] then
-						if n1+1 > grid then
+						if n1+1 < grid  then
 							showroom( {"LR","R","BR","TR"},n1+1,n2 )
 						else
-							showroom( {"R","BR","TR"},n1+1,n2 )
+							showroom( {"R"},n1+1,n2 )
+							-- showroom( {"R","BR","TR"},n1+1,n2 )
 						end
 					end
-				end,1)
+				-- end,1)
 		elseif post[lp] == 'B' then
-			timer.performWithDelay(130,function () 
+			-- timer.performWithDelay(300,function () 
 					if not group.tileArray[n1][n2+1][3] then
-						if n2+1 > grid then
+						if n2+1 < grid  then
 							showroom( {"TL","TR","T","TB"},n1,n2+1 )
 						else
-							showroom( {"TL","TR","T"},n1,n2+1 )
+							showroom( {"T"},n1,n2+1 )
+							-- showroom( {"TL","TR","T"},n1,n2+1 )
 						end
 					end
-				end,1)
+				-- end,1)
 		elseif post[lp] == 'R' then
-			timer.performWithDelay(140,function () 
+			-- timer.performWithDelay(400,function () 
 					if not group.tileArray[n1-1][n2][3] then
 						if n1-1 ~= 1 then
 							showroom( {"LR","LB","L"},n1-1,n2 )
 						else
-							showroom( {"LB","L"},n1-1,n2 )
+							showroom( {"L"},n1-1,n2 )
+							-- showroom( {"LB","L"},n1-1,n2 )
 						end
 					end
-				end,1)
+				-- end,1)
 		end
 	end
 end
