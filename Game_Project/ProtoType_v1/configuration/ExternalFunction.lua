@@ -66,6 +66,10 @@ function Object:animate(params)
 	local type = p.type or "dslash"
 	local group_x = p.x or gameCenterX
 	local group_y = p.y or gameCenterY	
+	local group_flip = gameScale
+	if (p.flip) then
+		group_flip = -gameScale
+	end	
 
 	local JsonSheet = json.decode( Object.JsonUtils.loadAsset(modelJson[model][id].json))
 	local frames = JsonSheet.frames
@@ -90,7 +94,7 @@ function Object:animate(params)
 	group.x = group_x
 	group.y = group_y
 
-	group.xScale = gameScale
+	group.xScale = group_flip
 	group.yScale = gameScale
 	group:play()
 

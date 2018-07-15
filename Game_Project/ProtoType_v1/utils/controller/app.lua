@@ -121,18 +121,20 @@ function Object:attack_button(groupObject)
 						lastAttack = v.animation.type
 					end
 				end
-				if (attackCount == 3) then
-					local lastArr = {'dslash','uslash','thrust'}
-					playSequence(groupObject,'attack_'..lastAttack)
-				else
-					playSequence(groupObject,'attack_'..attackCount)
-				end
+				local lastArr = {'1','2','dslash','uslash','thrust','slam'}
+				playSequence(groupObject,'attack_'..lastArr[math.random(#lastArr)])
+				-- if (attackCount == 3) then
+				-- 	local lastArr = {'dslash','uslash','thrust'}
+				-- 	playSequence(groupObject,'attack_'..lastAttack)
+				-- else
+				-- 	playSequence(groupObject,'attack_'..attackCount)
+				-- end
 				if (attackCount >= 3) then
 					attackCount = 0
 				end
 			end	
 		end
-	end
+	end 
 	group:addEventListener('touch',group)
 end
 -- add controller function
